@@ -26,7 +26,7 @@ export class GamesRepository implements IGamesRepository {
   async findUsersByGameId(id: string): Promise<User[]> {
     // Complete usando query builder
     return this.repository
-      .createQueryBuilder("games").innerJoin("games.users", "users").getOne()
+      .createQueryBuilder("games").innerJoinAndSelect("games.users", "users").getOne()
       .then(game => {
         if(!game) {
           throw new Error("Game not found!");
